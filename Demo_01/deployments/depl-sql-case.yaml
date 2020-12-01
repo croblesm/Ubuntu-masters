@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: geokids-db-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: geokids-db
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: geokids-db
+    spec:
+      terminationGracePeriodSeconds: 5
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: geokids-db
+        image: mcr.microsoft.com/mssql/server:2019-CU8-ubuntu-18.04
+        ports:
+          - containerPort: 1401
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: geokids-sa-password
+              key: sa_password 
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+        resources:
+          limits:
+            memory: "2Gi"
+      volumes:
+        - name: mssqldb
+          persistentVolumeClaim:
+            claimName: pvc-sql-data
+
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mssql-case-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sql-case
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: sql-case
+    spec:
+      terminationGracePeriodSeconds: 5
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: sql-case
+        image: mcr.microsoft.com/mssql/server:2019-CU3-ubuntu-18.04
+        ports:
+          - containerPort: 1400
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+        - name: SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: case-cred
+              key: SA_PASSWORD 
+        volumeMounts:
+        - name: mssqldb
+          mountPath: /var/opt/mssql
+        resources:
+          limits:
+            memory: "2Gi"
+      volumes:
+        - name: mssqldb
+          persistentVolumeClaim:
+            claimName: pvc-data-case

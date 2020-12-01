@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mssql-case-service
+spec:
+  selector:
+    app: sql-case
+  ports:
+    - protocol: TCP
+      port: 1400
+      targetPort: 1433
+  type: LoadBalancer
