@@ -39,7 +39,7 @@ microk8s stop
 microk8s status
 
 # Note:
-# dns & storage are critical for statefull apps (databases) 👀 
+# metallb, ha-cluster, dns & storage are critical for statefull apps (databases) 👀 
 
 # 6- Enable MicroK8s (kubernetes) addons
 microk8s enable helm3

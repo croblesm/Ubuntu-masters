@@ -1,7 +1,7 @@
 -- ==============================================================================
 -- 
 -- Script name   :   PlanetEarth-Objects.sql
--- Description   :   SQL script to create all Planet Earth database objects
+-- Description   :   SQL script to create all Planet Earth database and objects
 --                   continents, regions, countries
 -- Author        :   Carlos Robles
 -- Email         :   crobles@dbamastery.com
@@ -9,6 +9,16 @@
 -- Date          :   2020-11
 -- 
 -- ==============================================================================
+
+-- Create Planet Earth database
+-- ==============================================================================
+-- Set context to master database
+USE master;
+GO
+
+-- Create Planet Earth database
+CREATE DATABASE PlanetEarth;
+GO
 
 -- Set context to Planet Earth database
 USE PlanetEarth;
