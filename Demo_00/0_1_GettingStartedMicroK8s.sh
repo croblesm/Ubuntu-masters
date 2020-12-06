@@ -1,4 +1,4 @@
-# DEMO 0 - Getting started with MicroK8s
+# Demo 0 - Getting started with MicroK8s
 # 
 #   1- List multipass instances
 #   2- Get micro-k8s vm info

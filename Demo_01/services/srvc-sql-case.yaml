@@ -9,4 +9,4 @@ spec:
     - protocol: TCP
       port: 1400
       targetPort: 1433
-  type: LoadBalancer
+  type: NodePort

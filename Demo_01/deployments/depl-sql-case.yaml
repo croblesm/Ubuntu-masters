@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployment-sql-case
+  name: depl-sql-case
 spec:
   replicas: 1
   selector:

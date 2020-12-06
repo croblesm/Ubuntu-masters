@@ -1,4 +1,4 @@
-# DEMO 0 - Use kubectl with MicroK8s
+# Demo 0 - Use kubectl with MicroK8s
 # 
 #   1- Get microK8s configuration
 #   2- Grab MicroK8s token

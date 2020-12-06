@@ -1,6 +1,6 @@
 -- ==============================================================================
 -- 
--- Script name   :   PlanetEarth-Objects.sql
+-- Script name   :   PlanetEarth-Database.sql
 -- Description   :   SQL script to create all Planet Earth database and objects
 --                   continents, regions, countries
 -- Author        :   Carlos Robles
@@ -24,7 +24,7 @@ GO
 USE PlanetEarth;
 GO
 
--- Create continents table
+-- Create continents table 
 -- ==============================================================================
 CREATE TABLE continents (
     continent_id INT NOT NULL IDENTITY (1, 1),
