@@ -3,10 +3,9 @@
 #
 #   1- Get Kubernetes version by location
 #   2- Create AKS cluster
-#   3- Enable Virtual kubelet addon (Optional)
-#   4- Get AKS credentials for AKS cluster
-#   5- Check kubectl cluster context
-#   6- Get AKS cluster nodes
+#   3- Get AKS credentials for AKS cluster
+#   4- Check kubectl cluster context
+#   5- Get AKS cluster nodes
 # -----------------------------------------------------------------------------
 # References:
 #   Deploy an Azure Kubernetes Service cluster using the Azure CLI
@@ -33,7 +32,7 @@ az aks create \
     --location $location \
     --name $aks_cluster \
     --kubernetes-version $k8s_version \
-    --node-count 2 \
+    --node-count 3 \
     --node-vm-size $vm_size \
     --node-osdisk-size 100 \
     --vm-set-type AvailabilitySet \
@@ -41,17 +40,23 @@ az aks create \
     --load-balancer-sku standard \
     --generate-ssh-keys
 
-# 3- Enable Virtual kubelet addon (Optional)
-az aks enable-addons \
-    --resource-group $resource_group \
-    --name $aks_cluster \
-    --addons virtual-node
-
-# 4- Get AKS credentials for AKS cluster
+# 3- Get AKS credentials for AKS cluster
 az aks get-credentials -a --resource-group $resource_group --name $aks_cluster
 
-# 5- Check kubectl cluster context
+# 4- Check kubectl cluster context
 kubectl config get-contexts
 
-# 6- Get AKS cluster nodes
+# 5- Get AKS cluster nodes
 kubectl get nodes
+
+# 6- Label nodes for SQL Server and burstable workloads
+kubectl label nodes aks-agentpool-24128216-0 workload=sqlserver
+kubectl label nodes aks-agentpool-24128216-1 workload=sqlserver
+kubectl label nodes aks-agentpool-24128216-2 workload=sqlserver
+kubectl label nodes virtual-node-aci-linux workload=burstable
+
+# 7- Get SQL Server possible nodes
+kubectl get nodes -l workload=sqlserver
+
+# 8- Get virtual kubelet nodes
+kubectl get nodes -l workload=burstable
