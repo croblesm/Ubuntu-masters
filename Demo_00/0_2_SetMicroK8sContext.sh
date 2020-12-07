@@ -8,7 +8,7 @@
 #   6- Set MicroK8s cluster credentials in kubectl using token
 #   7- Set microk8s context in kubectl
 #   8- Use microk8s context in kubectl
-#   9- Test a few commands
+#   9- Test basic commands
 # -----------------------------------------------------------------------------
 # Reference:
 #   https://ubuntu.com/tutorials/install-a-local-kubernetes-with-microk8s#1-overview
@@ -17,14 +17,11 @@
 # 1- Get microK8s configuration
 microk8s config
 
-# 2- Grab MicroK8s token
-microk8s config | grep token
+# 2- Grab MicroK8s admin's token (into variable)
+mk8s_token=`microk8s config | grep token | awk '{ print $2}'`
 
 # 3- Grab MicroK8s server IP
 microk8s config | grep server
-
-# 4- Use token as variable
-export mk8s_token=dVhpSUE4UndXRHNkckhkUExST09lVVl2Qkx0WU50Rk9yZXRmMDNEdy96WT0K
 
 # 5- Set MicroK8s cluster context in kubectl (No certificate)
 kubectl config set-cluster microk8s --server=https://192.168.64.2:16443 --insecure-skip-tls-verify=true
@@ -38,7 +35,7 @@ kubectl config set-context microk8s --cluster=microk8s --namespace=default --use
 # 8- Use microk8s context in kubectl
 kubectl config use-context microk8s
 
-# 9- Test a few commands
+# 9- Use kubectl basic commands
 # Get cluster info (MicroK8s)
 kubectl cluster-info
 

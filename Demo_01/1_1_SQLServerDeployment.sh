@@ -4,6 +4,8 @@
 #   2- Check Kubernetes objects
 #   3- Check SQL Server pod logs
 #   4- Connect to SQL Server locally
+#   5- Perform database deployment (database, tables, data)
+#   6- Verify Planet Earth database
 # -----------------------------------------------------------------------------
 # References
 #   Kubernetes cheat sheet
@@ -44,7 +46,7 @@ kubectl apply -f ./services/srvc-sql-case.yaml
 # Create SQL Server deployment (Pod)
 kubectl apply -f ./deployments/depl-sql-case.yaml --record
 
-# 2- Check Kubernetes objects
+# 2- Check Kubernetes objects 🧐
 # Set Kubernetes context to MicroK8s and case-sql namespace
 kubectl config use-context microk8s
 kubectl config set-context --current --namespace=case-sql

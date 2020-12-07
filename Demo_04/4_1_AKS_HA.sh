@@ -18,15 +18,12 @@ SQLCMDUSER='sa';
 az aks get-credentials --resource-group ubuntu-masters --name Endurance
 
 # 1- Simulate failure
-code ./4_2_SimulateFailure.sh
-./4_2_SimulateFailure.sh
-
-NODE=`kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName | grep -v NAME | awk '{print $3}'`
-kubectl cordon ${NODE}
+code ./4_2_SimulatePodFailure.sh
+./4_2_SimulatePodFailure.sh
 
 # 2- Verify SQL Server instance
 # --------------------------------------
 # Azure Data Studio step
 # --------------------------------------
 
-# 3- Check AKS dashboard
+# 3- Check AKS dashboard in Azure's portal

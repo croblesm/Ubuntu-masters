@@ -1,14 +1,8 @@
 # Demo 02 - SQL Server connectivity - AKS
 # 
-#   1- Review Kubernetes manifests
-#   9- Push changes to repository
-#   10- Monitor Azure pipeline
-#   11- Check Flyway migration job status
-#   12- Review Flyway schema history
-#   13- Review changes in SQL Server Planet Earth database
-#   14- Check Planet Earth website
-#   15- Create Kubernetes and GitHub release tag
-#   16- Check pipeline CI options
+#   1- Kubernetes architecture and objects
+#   2- Connect to Planet Earth database within Kubernetes
+#   3- Connect to Planet Earth database from local client
 # -----------------------------------------------------------------------------
 # References:
 #   SQLCMD with Alpine
@@ -52,7 +46,7 @@ kubectl get services
 # NodePort for SQL Server --> No inbound connectivity outside Kubernetes cluster, port 1401
 # LoadBalance for WebApp --> Inbound connectivity from internet, port 8083
 
-# 2- Connect to SQL Server Planet Earth database
+# 2- Connect to Planet Earth database within Kubernetes
 # mssql-tools-alpine: Minimalistic SQLCMD container image (~17 MBs) 👀 👍
 # It provides portability and agility to run queries using a SQLCMD container on the fly.
 # https://github.com/dbamaster/mssql-tools-alpine 
@@ -99,7 +93,7 @@ kubectl port-forward pod/$sql_pod 1402:1433
 SQLCMDPASSWORD='_EnDur@nc3_';
 SQLCMDUSER='sa';
 
-# 13- Review changes in SQL Server Planet Earth database
+# 3- Connect to Planet Earth database from local client
 # Get all tables on Planet Earth database - Formatted output
 # ProTip: Limiting the number of characters by column produces a clean output format 👌
 sqlcmd -S 127.0.0.1,1402 -d PlanetEarth -i ./PlatEarth-GetTables.sql

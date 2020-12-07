@@ -1,9 +1,11 @@
 # Demo 0 - Getting started with MicroK8s
 # 
-#   1- List multipass instances
-#   2- Get micro-k8s vm info
-#   3- Get MicroK8s status
-#   4- Enable MicroK8s (kubernetes) addons
+#   1- Manage Multipass
+#   2- List multipass instances
+#   3- Get micro-k8s Ubuntu VM info
+#   4- Manage MicroK8s
+#   5- Get MicroK8s status
+#   6- Enable MicroK8s (kubernetes) addons
 # -----------------------------------------------------------------------------
 # Reference:
 #   https://multipass.run

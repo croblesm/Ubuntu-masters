@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#####################################################################
+# Script name:    Simulate pod failure                                                                                              
+# Description:    This script will delete the existing SQL Server pod                                                                                 
+# Author:         Carlos Robles
+# Email:          crobles@dbamastery.com
+#####################################################################
+
 # Variables
 k8s_cluster=endurance-admin;
 namespace=plex-sql;

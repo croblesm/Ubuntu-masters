@@ -4,6 +4,12 @@
 #   2- Check Kubernetes objects
 #   3- Check SQL Server pod logs
 # -----------------------------------------------------------------------------
+# Reference:
+#   Kubernetes cheat sheet
+#   https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+#
+#   Deploy a SQL Server container in Kubernetes with Azure Kubernetes Services
+#   https://docs.microsoft.com/en-us/sql/linux/tutorial-sql-server-containers-kubernetes
 #
 
 # 1- SQL Server Kubernetes deployment (MicroK8s)
