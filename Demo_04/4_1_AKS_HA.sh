@@ -2,7 +2,7 @@
 # 
 #   1- Simulate failure
 #   2- Verify SQL Server instance
-#   3- Check Kubernetes dashboard
+#   3- Check AKS dashboard
 # -----------------------------------------------------------------------------
 # References
 #   Pacemaker cluster for SQL Server on Linux
@@ -29,4 +29,4 @@ kubectl cordon ${NODE}
 # Azure Data Studio step
 # --------------------------------------
 
-# 3- Check Kubernetes dashboard
+# 3- Check AKS dashboard

@@ -1,8 +1,8 @@
 # Demo 03 - SQL Server version upgrade (Kubernetes style 😎)
 # 
 #   1- Connect to Kubernetes cluster in AKS
-#   2- Check SQL Server version (pod image)
-#   3- Check PVC - Matching AZ disk with AKS-PVC
+#   2- Get SQL Server (pod) image version
+#   3- Check data volume (pvc)
 #   4- Upgrade SQL Server (pod image)
 #   5- Check rolling upgrade status
 #   6- Check rollout history
@@ -18,18 +18,18 @@ SQLCMDUSER='sa';
 az aks get-credentials --resource-group ubuntu-masters --name Endurance
 
 # 1- Connect to Kubernetes cluster in AKS
-kubectl config use-context endurance
+kubectl config use-context endurance-admin
 kubectl config set-context --current --namespace=plex-sql
 kubectl config get-contexts
 
-# 2- Check SQL Server version (pod image)
+# 2- Get SQL Server (pod) image version
 kubectl get pods -l app=sql-plex --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}"
 
-# 3- Check PVC - Matching AZ disk with AKS-PVC
+# 3- Check data volume (pvc)
 kubectl describe pvc pvc-data-plex
 
 # Filter by Volume
-kubectl describe pvc pvc-data-plex | grep "Volume:" #  ➡️ Match it with AKS-PVC
+kubectl describe pvc pvc-data-plex | grep "Volume:" #  ➡️ Match it with Azure disk within RG
 # Go to the portal --> All resources --> Look for PVC disk
 
 # 4- Upgrade SQL Server (pod image)

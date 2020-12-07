@@ -25,8 +25,9 @@ FROM sys.dm_os_sys_info;
 SELECT name FROM sys.databases
 
 -- Get all Human Resources tables
-SELECT * FROM HumanResources.information_schema.tables
+SELECT * FROM PlanetEarth.information_schema.tables
 
 -- Run verification queries
-SELECT * FROM HumanResources.dbo.Employee;
-SELECT * FROM HumanResources.dbo.EmployeeDetails;
+SELECT * FROM PlanetEarth.dbo.continents;
+SELECT * FROM PlanetEarth.dbo.regions;
+SELECT * FROM PlanetEarth.dbo.countries;

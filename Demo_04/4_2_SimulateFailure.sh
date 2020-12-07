@@ -1,10 +1,12 @@
 #!/bin/bash
 
-k8s_cluster=docker-desktop;
-namespace=case-sql;
+# Variables
+k8s_cluster=endurance-admin;
+namespace=plex-sql;
 
+# Setting kubectl context to desired cluster 
 echo -e  "Setting kubectl context to Docker desktop\n"
-kubectl config set-context $k8s_cluster
+kubectl config use-context $k8s_cluster
 kubectl config set-context --current --namespace=$namespace
 
 echo -e "=============================================="
@@ -16,10 +18,10 @@ echo -e "=============================================="
 # Checking pod status
 echo -e "\nGetting status of curent pods:"
 echo -e "**********************************************\n"
-kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,IP:.status.podIP
+kubectl get pods -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName
 
 # Getting pod name
-pod=`kubectl get pods | grep mssql-case | awk {'print $1'}`
+pod=`kubectl get pods -l app=sql-plex --no-headers -o custom-columns=":metadata.name"`
 
 # Deleting pods
 echo -e "\n Deleting pods / Simulating pod failure"
@@ -35,7 +37,7 @@ status=0
 while [ $status -le 0 ]
 do
   echo -e "\nWaiting for new pod ... "
-  status=`kubectl get pods --field-selector=status.phase=Running | grep mssql-case | wc -l`
+  status=`kubectl get pods --field-selector=status.phase=Running | grep sql-plex | wc -l`
   sleep 2
 done
 
@@ -46,12 +48,12 @@ end_time="$(date -u +%s)"
 echo -e "\nGetting status of new pod:\n"
 echo -e "**********************************************\n"
 sleep 4
-kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName,IP:.status.podIP
+kubectl get pods -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName
 
 # Get latest pod status
 echo -e "\nChecking SQL Server logs from latest pod:"
 echo -e "**********************************************\n"
-new_pod=`kubectl get pods | grep mssql-case | awk {'print $1'}`
+new_pod=`kubectl get pods -l app=sql-plex --no-headers -o custom-columns=":metadata.name"`
 kubectl logs $new_pod
 
 # Calculating outage

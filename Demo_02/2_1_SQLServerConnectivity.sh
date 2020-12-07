@@ -31,7 +31,7 @@ kubectl config get-contexts
 kubectl version --short # Same as MicroK8s 👌
 
 # Set Kubernetes context to AKS cluster (endurance)
-kubectl config use-context endurance
+kubectl config use-context endurance-admin
 kubectl config set-context --current --namespace=plex-sql
 
 # Get SQL Server nodes
