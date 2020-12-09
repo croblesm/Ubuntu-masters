@@ -12,7 +12,7 @@
 #   https://docs.microsoft.com/en-us/sql/linux/tutorial-sql-server-containers-kubernetes
 #
 
-# 1- SQL Server Kubernetes deployment (MicroK8s)
+# 1- SQL Server Kubernetes deployment (AKS)
 # Set Kubernetes context to MicroK8s
 kubectl config get-contexts
 kubectl config use-context endurance-admin

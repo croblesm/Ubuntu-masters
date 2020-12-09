@@ -2,7 +2,7 @@
 # 
 #   1- Simulate failure
 #   2- Verify SQL Server instance
-#   3- Check AKS dashboard
+#   3- Check AKS dashboard in Azure's portal
 # -----------------------------------------------------------------------------
 # References
 #   Pacemaker cluster for SQL Server on Linux
