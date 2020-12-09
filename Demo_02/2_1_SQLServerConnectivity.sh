@@ -38,7 +38,7 @@ kubectl get nodes -l workload=tools -o wide
 kubectl get deployments
 
 # Kubernetes pods
-# Get the list of pods including node name (SQL Server runs on 01 node)
+# Get the list of pods including node name (SQL Server runs on nodes 01 and 02)
 kubectl get pod -o=custom-columns=NAME:.metadata.name,STATUS:.status.phase,NODE:.spec.nodeName
 
 # Kubernetes services
